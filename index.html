@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selection Translate AI – API Guide</title>
+  <meta name="description" content="Chrome extension for instant AI translation of selected text with grammar insights. Bring your own OpenAI, Anthropic, xAI or Google key — the key never leaves your browser.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://selection-translate.ai/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Selection Translate AI – API Guide">
+  <meta property="og:description" content="Select a word — get a translation, then unlock contextual grammar with the lamp. Your API key stays in your browser.">
+  <meta property="og:image" content="icon128.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Selection Translate AI – API Guide">
+  <meta name="twitter:description" content="Select a word — get a translation, then unlock contextual grammar with the lamp. Your API key stays in your browser.">
+  <meta name="twitter:image" content="icon128.png">
+  <link rel="icon" href="icon128.png">
+  <link rel="apple-touch-icon" href="icon128.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══ Nav ══════════════════════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;display:block">
+          <defs>
+            <linearGradient id="nlg" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/>
+              <stop offset="1" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+          <circle cx="14" cy="14" r="14" fill="url(#nlg)"/>
+          <rect x="8" y="9.5" width="12" height="2.5" rx="1.25" fill="white"/>
+          <rect x="12.75" y="9.5" width="2.5" height="10" rx="1.25" fill="white"/>
+        </svg>
+        <span>Selection Translate AI</span>
+      </a>
+      <div class="nav-links">
+        <a href="#alternative" data-i18n="nav_alt"></a>
+        <a href="#walkthrough" data-i18n="nav_walk"></a>
+        <a href="#howto" data-i18n="nav_howto"></a>
+        <a href="#guide" data-i18n="nav_guide"></a>
+        <a href="#privacy" data-i18n="nav_privacy"></a>
+      </div>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="ru" title="Русский" aria-label="Русский">&#127479;&#127482;</button>
+        <button class="lang-btn" data-lang="en" title="English" aria-label="English">&#127468;&#127463;</button>
+        <button class="lang-btn" data-lang="es" title="Español" aria-label="Español">&#127466;&#127480;</button>
+        <button class="lang-btn" data-lang="zh" title="中文" aria-label="中文">&#127464;&#127475;</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+  <!-- ══ Hero ═════════════════════════════════════════════════ -->
+  <section class="hero" id="top">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-content container">
+      <div class="hero-badge-wrap">
+        <span class="hero-badge" data-i18n="badge"></span>
+      </div>
+      <h1 class="hero-title" data-i18n="hero_title"></h1>
+      <p class="hero-sub" data-i18n="hero_sub"></p>
+      <a href="#guide" class="hero-cta" data-i18n="hero_cta"></a>
+    </div>
+    <div class="hero-scroll">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M12 5v14M5 12l7 7 7-7" stroke="rgba(255,255,255,0.6)" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ══ Alternative ══════════════════════════════════════════ -->
+  <section class="alt-section" id="alternative">
+    <div class="container">
+      <div class="section-tag reveal" data-i18n="alt_tag"></div>
+      <h2 class="section-title reveal" data-i18n="alt_title"></h2>
+      <p class="section-sub reveal" data-i18n="alt_sub"></p>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">&#128172;</div>
+          <h3 data-i18n="feat1_title"></h3>
+          <p data-i18n="feat1_text"></p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">&#128161;</div>
+          <h3 data-i18n="feat2_title"></h3>
+          <p data-i18n="feat2_text"></p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-icon">&#128273;</div>
+          <h3 data-i18n="feat3_title"></h3>
+          <p data-i18n="feat3_text"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Walkthrough screenshots ══════════════════════════════ -->
+  <section class="walkthrough-section" id="walkthrough">
+    <div class="container">
+      <div class="section-tag reveal" data-i18n="walk_tag"></div>
+      <h2 class="section-title reveal" data-i18n="walk_title"></h2>
+      <p class="section-sub reveal" data-i18n="walk_sub"></p>
+
+      <div class="walk-grid">
+        <figure class="walk-step reveal">
+          <img src="screenshots/select_1.png" alt="Select a word" loading="lazy" decoding="async">
+          <figcaption><strong>1.</strong> <span data-i18n="walk_s1"></span></figcaption>
+        </figure>
+        <figure class="walk-step reveal">
+          <img src="screenshots/select_2.png" alt="Translation popup" loading="lazy" decoding="async">
+          <figcaption><strong>2.</strong> <span data-i18n="walk_s2"></span></figcaption>
+        </figure>
+        <figure class="walk-step reveal">
+          <img src="screenshots/select_3.png" alt="Lamp button" loading="lazy" decoding="async">
+          <figcaption><strong>3.</strong> <span data-i18n="walk_s3"></span></figcaption>
+        </figure>
+        <figure class="walk-step reveal">
+          <img src="screenshots/select_4.png" alt="Contextual explanation" loading="lazy" decoding="async">
+          <figcaption><strong>4.</strong> <span data-i18n="walk_s4"></span></figcaption>
+        </figure>
+      </div>
+
+      <figure class="walk-full reveal">
+        <img src="screenshots/select_5.png" alt="Interface language flags" loading="lazy" decoding="async">
+        <figcaption data-i18n="walk_s5"></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══ How to use ═══════════════════════════════════════════ -->
+  <section class="howto-section" id="howto">
+    <div class="container">
+      <div class="section-tag reveal" data-i18n="howto_tag"></div>
+      <h2 class="section-title reveal" data-i18n="howto_title"></h2>
+      <p class="section-sub reveal" data-i18n="howto_sub"></p>
+
+      <div class="howto-steps reveal">
+        <div class="howto-step">
+          <div class="howto-step-num">1</div>
+          <div class="howto-step-body">
+            <h3 data-i18n="howto_s1_title"></h3>
+            <p data-i18n="howto_s1_text"></p>
+          </div>
+        </div>
+        <div class="howto-step">
+          <div class="howto-step-num">2</div>
+          <div class="howto-step-body">
+            <h3 data-i18n="howto_s2_title"></h3>
+            <p data-i18n="howto_s2_text"></p>
+          </div>
+        </div>
+        <div class="howto-step">
+          <div class="howto-step-num">3</div>
+          <div class="howto-step-body">
+            <h3 data-i18n="howto_s3_title"></h3>
+            <p data-i18n="howto_s3_text"></p>
+          </div>
+        </div>
+        <div class="howto-step">
+          <div class="howto-step-num">4</div>
+          <div class="howto-step-body">
+            <h3 data-i18n="howto_s4_title"></h3>
+            <p data-i18n="howto_s4_text"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="howto-features">
+        <div class="howto-feature reveal">
+          <div class="howto-feat-icon">⚡</div>
+          <h3 data-i18n="howto_instant_title"></h3>
+          <p data-i18n="howto_instant_text"></p>
+        </div>
+        <div class="howto-feature reveal">
+          <div class="howto-feat-icon">📚</div>
+          <h3 data-i18n="howto_dict_title"></h3>
+          <p data-i18n="howto_dict_text"></p>
+        </div>
+        <div class="howto-feature reveal">
+          <div class="howto-feat-icon">⌨️</div>
+          <h3 data-i18n="howto_hotkeys_title"></h3>
+          <div class="howto-hotkeys">
+            <div class="howto-hk-row"><kbd>Alt+Shift+T</kbd><span data-i18n="howto_hk_toggle"></span></div>
+            <div class="howto-hk-row"><kbd>Alt+Shift+S</kbd><span data-i18n="howto_hk_dict"></span></div>
+            <div class="howto-hk-row"><kbd>Esc</kbd><span data-i18n="howto_hk_close"></span></div>
+          </div>
+        </div>
+        <div class="howto-feature reveal">
+          <div class="howto-feat-icon">⚙️</div>
+          <h3 data-i18n="howto_settings_title"></h3>
+          <p data-i18n="howto_settings_text"></p>
+        </div>
+        <div class="howto-feature reveal">
+          <div class="howto-feat-icon">🌍</div>
+          <h3 data-i18n="howto_langs_title"></h3>
+          <p data-i18n="howto_langs_text"></p>
+        </div>
+        <div class="howto-feature reveal">
+          <div class="howto-feat-icon">🚀</div>
+          <h3 data-i18n="howto_preload_title"></h3>
+          <p data-i18n="howto_preload_text"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Guide ════════════════════════════════════════════════ -->
+  <section class="guide-section" id="guide">
+    <div class="container">
+      <div class="section-tag reveal" data-i18n="guide_tag"></div>
+      <h2 class="section-title reveal" data-i18n="guide_title"></h2>
+      <p class="section-sub reveal" data-i18n="guide_sub"></p>
+
+      <div class="provider-tabs reveal" id="provider-tabs">
+        <button class="provider-tab active" data-provider="openai">
+          <span class="ptab-dot" style="background:#10a37f"></span>
+          <span>OpenAI</span>
+        </button>
+        <button class="provider-tab" data-provider="anthropic">
+          <span class="ptab-dot" style="background:#d97706"></span>
+          <span>Anthropic</span>
+        </button>
+        <button class="provider-tab" data-provider="google">
+          <span class="ptab-dot" style="background:#4285F4"></span>
+          <span>Google Gemini</span>
+        </button>
+        <button class="provider-tab" data-provider="xai">
+          <span class="ptab-dot" style="background:#111827"></span>
+          <span>xAI Grok</span>
+        </button>
+      </div>
+
+      <div id="guide-content" class="guide-content"></div>
+    </div>
+  </section>
+
+  <!-- ══ Privacy ══════════════════════════════════════════════ -->
+  <section class="privacy-section" id="privacy">
+    <div class="container">
+      <div class="privacy-inner">
+        <div class="privacy-visual">
+          <svg class="lock-svg" width="160" height="160" viewBox="0 0 160 160" fill="none">
+            <circle class="lock-bg" cx="80" cy="80" r="72" fill="#EEF2FF"/>
+            <path class="lock-shackle" d="M52 76V52C52 36.5 64.5 24 80 24C95.5 24 108 36.5 108 52V76"
+              stroke="#4F46E5" stroke-width="10" stroke-linecap="round"/>
+            <rect class="lock-body" x="38" y="72" width="84" height="64" rx="12" fill="#4F46E5"/>
+            <circle class="lock-hole" cx="80" cy="100" r="10" fill="white"/>
+            <rect class="lock-bar" x="76" y="100" width="8" height="16" rx="3" fill="white"/>
+          </svg>
+        </div>
+        <div class="privacy-text-wrap">
+          <div class="section-tag" data-i18n="privacy_tag"></div>
+          <h2 class="section-title" data-i18n="privacy_title"></h2>
+          <p data-i18n="privacy_text"></p>
+          <ul class="privacy-list">
+            <li data-i18n="privacy_li1"></li>
+            <li data-i18n="privacy_li2"></li>
+            <li data-i18n="privacy_li3"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- ══ Footer ═══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.65;display:block;flex-shrink:0">
+          <circle cx="11" cy="11" r="11" fill="#8b5cf6"/>
+          <rect x="6" y="7.5" width="10" height="2" rx="1" fill="white"/>
+          <rect x="10" y="7.5" width="2" height="8" rx="1" fill="white"/>
+        </svg>
+      <span data-i18n="footer"></span>
+      <div class="footer-links">
+        <a href="mailto:kostanian.ag@gmail.com" class="footer-privacy-link">kostanian.ag@gmail.com</a>
+        <a href="privacy-policy.html" class="footer-privacy-link" data-i18n="footer_privacy"></a>
+        <a href="terms.html" class="footer-privacy-link" data-i18n="footer_terms"></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ Lightbox for screenshots ══════════════════════════════ -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightbox-img" alt="">
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      const box = document.getElementById('lightbox');
+      const img = document.getElementById('lightbox-img');
+      const closeBtn = document.getElementById('lightbox-close');
+
+      function open(src, alt) {
+        img.src = src;
+        img.alt = alt || '';
+        box.classList.add('open');
+        box.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        box.classList.remove('open');
+        box.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        // clear after transition to save memory
+        setTimeout(() => { if (!box.classList.contains('open')) img.src = ''; }, 250);
+      }
+
+      document.querySelectorAll('.walk-step img, .walk-full img').forEach(el => {
+        el.style.cursor = 'zoom-in';
+        el.addEventListener('click', () => open(el.src, el.alt));
+      });
+
+      box.addEventListener('click', (e) => {
+        if (e.target === box || e.target === img) close();
+      });
+      closeBtn.addEventListener('click', close);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && box.classList.contains('open')) close();
+      });
+    })();
+  </script>
+</body>
+</html>
