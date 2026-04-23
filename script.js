@@ -10,6 +10,18 @@ const T = {
     nav_guide:    "API ключи",
     nav_privacy:  "Приватность",
     nav_howto:    "Как использовать",
+    nav_support:  "Поддержка",
+    support_tag:  "Связь с нами",
+    support_title: "Поддержка и обратная связь",
+    support_sub:  "Возник вопрос, нашли ошибку или хотите предложить идею? Напишите нам — мы отвечаем обычно в течение 1–2 рабочих дней.",
+    support_email_label: "Напишите на почту",
+    support_name_label: "Ваше имя",
+    support_email_field_label: "Ваш email",
+    support_message_label: "Сообщение",
+    support_submit: "Отправить сообщение",
+    support_status_sending: "Отправка…",
+    support_status_ok: "✅ Спасибо! Ваше сообщение отправлено.",
+    support_status_err: "❌ Не удалось отправить. Попробуйте позже или напишите на email напрямую.",
     walk_tag:     "Как это выглядит",
     walk_title:   "Посмотри как работает",
     walk_sub:     "Четыре шага от выделения до грамматического разбора в контексте предложения.",
@@ -89,6 +101,18 @@ const T = {
     nav_walk:     "Walkthrough",
     nav_guide:    "API Keys",
     nav_privacy:  "Privacy",
+    nav_support:  "Support",
+    support_tag:  "Get in touch",
+    support_title: "Support & Feedback",
+    support_sub:  "Have a question, found a bug, or want to share an idea? Drop us a line — we usually reply within 1–2 business days.",
+    support_email_label: "Email us",
+    support_name_label: "Your name",
+    support_email_field_label: "Your email",
+    support_message_label: "Message",
+    support_submit: "Send message",
+    support_status_sending: "Sending…",
+    support_status_ok: "✅ Thanks! Your message has been sent.",
+    support_status_err: "❌ Couldn't send. Please try again later or email us directly.",
     nav_howto:    "How to use",
     walk_tag:     "How it looks",
     walk_title:   "See it in action",
@@ -169,6 +193,18 @@ const T = {
     nav_walk:     "Demostración",
     nav_guide:    "Claves API",
     nav_privacy:  "Privacidad",
+    nav_support:  "Soporte",
+    support_tag:  "Contáctanos",
+    support_title: "Soporte y comentarios",
+    support_sub:  "¿Tienes una pregunta, encontraste un error o quieres compartir una idea? Escríbenos — solemos responder en 1–2 días hábiles.",
+    support_email_label: "Escríbenos un correo",
+    support_name_label: "Tu nombre",
+    support_email_field_label: "Tu correo electrónico",
+    support_message_label: "Mensaje",
+    support_submit: "Enviar mensaje",
+    support_status_sending: "Enviando…",
+    support_status_ok: "✅ ¡Gracias! Tu mensaje ha sido enviado.",
+    support_status_err: "❌ No se pudo enviar. Inténtalo más tarde o escríbenos directamente por correo.",
     nav_howto:    "Cómo usar",
     walk_tag:     "Cómo se ve",
     walk_title:   "Míralo en acción",
@@ -249,6 +285,18 @@ const T = {
     nav_walk:     "演示",
     nav_guide:    "API 密钥",
     nav_privacy:  "隐私",
+    nav_support:  "支持",
+    support_tag:  "联系我们",
+    support_title: "支持与反馈",
+    support_sub:  "有问题、发现错误或想分享想法？请给我们留言——我们通常在 1–2 个工作日内回复。",
+    support_email_label: "发送邮件",
+    support_name_label: "您的姓名",
+    support_email_field_label: "您的邮箱",
+    support_message_label: "消息内容",
+    support_submit: "发送消息",
+    support_status_sending: "发送中…",
+    support_status_ok: "✅ 谢谢！您的消息已发送。",
+    support_status_err: "❌ 发送失败。请稍后重试或直接发送邮件。",
     nav_howto:    "使用教程",
     walk_tag:     "运行效果",
     walk_title:   "看看实际效果",
@@ -855,6 +903,41 @@ function initLangSwitch() {
   });
 }
 
+// ── Support form (AJAX submit via FormSubmit) ──────────────
+function initSupportForm() {
+  const form = document.getElementById("support-form");
+  if (!form) return;
+  const status = document.getElementById("support-status");
+  const submitBtn = form.querySelector(".support-submit");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.className = "support-status";
+    status.textContent = t("support_status_sending");
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form),
+      });
+      if (res.ok) {
+        status.className = "support-status success";
+        status.textContent = t("support_status_ok");
+        form.reset();
+      } else {
+        throw new Error("Request failed");
+      }
+    } catch {
+      status.className = "support-status error";
+      status.textContent = t("support_status_err");
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+}
+
 // ── Copy button (delegated) ────────────────────────────────
 function initCopyButtons() {
   document.addEventListener("click", (e) => {
@@ -891,6 +974,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initLangSwitch();
   initProviderTabs();
   initCopyButtons();
+  initSupportForm();
   applyTranslations();
   loadGuide(currentProvider, false);
   // small delay so step reveal plays on initial load
