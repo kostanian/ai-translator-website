@@ -834,6 +834,10 @@ img { display: block; }
   background: #f1f5f9;
   border-bottom: 4px solid #6366f1;
 }
+.walk-step--fill img {
+  object-fit: cover;
+  object-position: top center;
+}
 .walk-step figcaption {
   position: relative;
   padding: 16px 18px 18px;
